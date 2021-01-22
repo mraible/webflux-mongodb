@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="place">
+      <h2 data-cy="placeDetailsHeading"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.detail.title">Place</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ place.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.name">Name</span></dt>
+        <dd>
+          <span>{{ place.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.numberOfSeats">Number Of Seats</span></dt>
+        <dd>
+          <span>{{ place.numberOfSeats }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.shortName">Short Name</span></dt>
+        <dd>
+          <span>{{ place.shortName }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.colorBackground">Color Background</span></dt>
+        <dd>
+          <span>{{ place.colorBackground }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.colorText">Color Text</span></dt>
+        <dd>
+          <span>{{ place.colorText }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.description">Description</span></dt>
+        <dd>
+          <span>{{ place.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.preferredDivision">Preferred Division</span></dt>
+        <dd>
+          <span *ngFor="let preferredDivision of place.preferredDivisions; let last = last">
+            <a [routerLink]="['/division', preferredDivision?.id, 'view']">{{ preferredDivision.name }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.owner">Owner</span></dt>
+        <dd>
+          <div *ngIf="place.owner">
+            <a [routerLink]="['/division', place.owner?.id, 'view']">{{ place.owner?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/place', place.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<div>
+  <h2 id="page-heading" data-cy="PlaceHeading">
+    <span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.home.title">Places</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-place"
+        [routerLink]="['/place/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.home.createLabel"> Create a new Place </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="places?.length === 0">
+    <span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.home.notFound">No places found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="places && places.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.name">Name</span></th>
+          <th scope="col"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.numberOfSeats">Number Of Seats</span></th>
+          <th scope="col"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.shortName">Short Name</span></th>
+          <th scope="col"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.colorBackground">Color Background</span></th>
+          <th scope="col"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.colorText">Color Text</span></th>
+          <th scope="col"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.preferredDivision">Preferred Division</span></th>
+          <th scope="col"><span jhiTranslate="sampleWebfluxMongodbApp.testRootPlace.owner">Owner</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let place of places; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/place', place.id, 'view']">{{ place.id }}</a>
+          </td>
+          <td>{{ place.name }}</td>
+          <td>{{ place.numberOfSeats }}</td>
+          <td>{{ place.shortName }}</td>
+          <td>{{ place.colorBackground }}</td>
+          <td>{{ place.colorText }}</td>
+          <td>{{ place.description }}</td>
+          <td>
+            <span *ngFor="let preferredDivision of place.preferredDivisions; let last = last">
+              <a class="form-control-static" [routerLink]="['/division', preferredDivision?.id, 'view']">{{ preferredDivision.name }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <div *ngIf="place.owner">
+              <a [routerLink]="['/division', place.owner?.id, 'view']">{{ place.owner?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/place', place.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/place', place.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(place)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

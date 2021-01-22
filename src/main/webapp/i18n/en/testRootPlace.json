@@ -1,0 +1,31 @@
+{
+  "sampleWebfluxMongodbApp": {
+    "testRootPlace": {
+      "home": {
+        "title": "Places",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Place",
+        "createOrEditLabel": "Create or edit a Place",
+        "notFound": "No Places found"
+      },
+      "created": "A new Place is created with identifier {{ param }}",
+      "updated": "A Place is updated with identifier {{ param }}",
+      "deleted": "A Place is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Place {{ id }}?"
+      },
+      "detail": {
+        "title": "Place"
+      },
+      "id": "ID",
+      "name": "Name",
+      "numberOfSeats": "Number Of Seats",
+      "shortName": "Short Name",
+      "colorBackground": "Color Background",
+      "colorText": "Color Text",
+      "description": "Description",
+      "preferredDivision": "Preferred Division",
+      "owner": "Owner"
+    }
+  }
+}

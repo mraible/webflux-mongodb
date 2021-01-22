@@ -1,0 +1,10 @@
+{
+  "sampleWebfluxMongodbApp": {
+    "DivisionType": {
+      "null": "",
+      "SCHOOL": "SCHOOL",
+      "CLASS": "CLASS",
+      "SUBGROUP": "SUBGROUP"
+    }
+  }
+}
